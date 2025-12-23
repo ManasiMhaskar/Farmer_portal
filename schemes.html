@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Government Schemes | Farmer Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Additional styles for schemes page */
+    .scheme-image-section {
+      background: linear-gradient(rgba(46, 125, 50, 0.9), rgba(33, 150, 243, 0.9)), 
+                  url('assets/img/scheme-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      padding: 100px 0; /* Increased padding */
+      border-radius: 20px;
+      margin: 40px 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .scheme-image-section h2 {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .scheme-image-section h2::after {
+      background: #FF9800;
+    }
+    
+    .scheme-stats {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2E7D32, #2196F3);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+    
+    .scheme-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin: 40px 0;
+    }
+    
+    .scheme-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #2E7D32, #2196F3);
+      border-radius: 3px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+      padding-left: 20px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #FF9800;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px #FF9800;
+    }
+    
+    .scheme-feature-box {
+      background: linear-gradient(135deg, #f8ffd8, #e1f5fe);
+      border-radius: 15px;
+      padding: 25px;
+      height: 100%;
+      border-left: 5px solid #2E7D32;
+      transition: all 0.3s ease;
+    }
+    
+    .scheme-feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .eligibility-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      background: linear-gradient(135deg, #FF9800, #FF5722);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin: 5px;
+    }
+    
+    .apply-btn {
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+    }
+    
+    .apply-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(46, 125, 50, 0.4);
+      color: white;
+    }
+    
+    .scheme-category {
+      padding: 8px 16px;
+      background: #e8f5e9;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #2E7D32;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    
+    .scheme-highlight {
+      background: linear-gradient(135deg, #fff8e1, #f3e5f5);
+      border-radius: 10px;
+      padding: 20px;
+      border: 2px dashed #FF9800;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container container-max">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="assets/img/logo1.png" alt="Logo"
+           style="height:80px;width:80px;border-radius:8px;object-fit:cover;margin-right:10px;">
+      <strong>Farmer Portal</strong>
+    </a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="crops.html">Crops</a></li>
+        <li class="nav-item"><a class="nav-link" href="weather.html">Weather</a></li>
+        <li class="nav-item"><a class="nav-link" href="fertilizer.html">Fertilizer</a></li>
+        <li class="nav-item"><a class="nav-link active" href="schemes.html">Schemes</a></li>
+        <li class="nav-item"><a class="nav-link" href="tools.html">Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="height:90px"></div>
+
+<!-- Added padding to main container -->
+<main class="container container-max page-enter py-5"> <!-- Added py-5 for vertical padding -->
+  <h2 class="reveal">Government Schemes</h2>
+  <p class="lead text-muted reveal delay-1 mb-4">
+    Explore various government schemes designed to support farmers with financial assistance, 
+    insurance, subsidies, and technical guidance.
+  </p>
+
+  <!-- Search Bar -->
+  <div class="reveal delay-1">
+    <input id="scheme-search" class="form-control mt-3" placeholder="🔍 Search scheme by name or category..."
+           onkeyup="filterSchemes(this.value)">
+  </div>
+
+  <!-- Image Section with increased padding -->
+  <section class="scheme-image-section reveal delay-1 my-5"> <!-- Added my-5 for vertical margin -->
+    <div class="row align-items-center">
+      <div class="col-lg-8 px-4"> <!-- Added px-4 for horizontal padding -->
+        <h2>Empowering Farmers Through Government Initiatives</h2>
+        <p class="lead mb-4">Join millions of farmers who have benefited from government schemes. 
+          From financial support to technological advancements, we're here to help you grow.</p>
+        <a href="#featured-schemes" class="apply-btn">Explore All Schemes</a>
+      </div>
+      <div class="col-lg-4 text-center px-4"> <!-- Added px-4 for horizontal padding -->
+        <div class="scheme-stats">
+          <div class="row text-center">
+            <div class="col-6 mb-4">
+              <div class="stat-number">15+</div>
+              <div class="stat-label">Active Schemes</div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="stat-number">2.5Cr+</div>
+              <div class="stat-label">Farmers Benefited</div>
+            </div>
+            <div class="col-6">
+              <div class="stat-number">₹2.5L Cr+</div>
+              <div class="stat-label">Funds Allocated</div>
+            </div>
+            <div class="col-6">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Schemes -->
+  <section id="featured-schemes" class="mt-5 pt-4"> <!-- Added pt-4 for top padding -->
+    <h3 class="reveal">Featured Schemes</h3>
+    <p class="text-muted mb-4 reveal delay-1">Most popular and beneficial schemes for farmers</p>
+    
+    <div class="row g-4 mt-3">
+      <!-- PM Kisan Scheme -->
+      <div class="col-md-6 scheme-card" data-title="PM Kisan" data-category="financial">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Financial Support</span>
+            <h4 class="mt-2">PM Kisan Samman Nidhi</h4>
+            <p class="text-muted">
+              Direct income support of ₹6,000 per year in three equal installments to all 
+              landholding farmer families across the country.
+            </p>
+            
+            <div class="scheme-highlight">
+              <strong>💰 Benefits:</strong>
+              <ul class="mt-2 mb-0">
+                <li>₹2,000 every 4 months</li>
+                <li>Direct bank transfer</li>
+                <li>No middlemen involved</li>
+              </ul>
+            </div>
+            
+            <div class="mt-3">
+              <strong>Eligibility:</strong>
+              <div class="mt-2">
+                <span class="eligibility-badge">Small Farmers</span>
+                <span class="eligibility-badge">Marginal Farmers</span>
+                <span class="eligibility-badge">All Landholders</span>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#pmkisanModal">
+                View Details
+              </button>
+              <a href="#" class="btn btn-outline-success">Apply Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crop Insurance Scheme -->
+      <div class="col-md-6 scheme-card" data-title="Crop Insurance" data-category="insurance">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Insurance</span>
+            <h4 class="mt-2">Pradhan Mantri Fasal Bima Yojana</h4>
+            <p class="text-muted">
+              Comprehensive crop insurance scheme providing financial support to farmers 
+              in case of crop failure due to natural calamities, pests & diseases.
+            </p>
+            
+            <div class="scheme-highlight">
+              <strong>🛡️ Coverage:</strong>
+              <ul class="mt-2 mb-0">
+                <li>Premium as low as 1.5-2%</li>
+                <li>Coverage for prevented sowing</li>
+                <li>Post-harvest losses covered</li>
+              </ul>
+            </div>
+            
+            <div class="mt-3">
+              <strong>Eligibility:</strong>
+              <div class="mt-2">
+                <span class="eligibility-badge">All Farmers</span>
+                <span class="eligibility-badge">Sharecroppers</span>
+                <span class="eligibility-badge">Tenant Farmers</span>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#cropInsuranceModal">
+                View Details
+              </button>
+              <a href="#" class="btn btn-outline-success">Check Premium</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kisan Credit Card -->
+      <div class="col-md-4 scheme-card" data-title="Kisan Credit" data-category="financial">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Credit Facility</span>
+            <h5 class="mt-2">Kisan Credit Card Scheme</h5>
+            <p class="text-muted">
+              Provide farmers with timely access to credit for cultivation needs, 
+              post-harvest expenses, consumption requirements, etc.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#kccModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soil Health Card -->
+      <div class="col-md-4 scheme-card" data-title="Soil Health" data-category="technical">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Technical Support</span>
+            <h5 class="mt-2">Soil Health Card Scheme</h5>
+            <p class="text-muted">
+              Provides soil health cards to farmers every 3 years to promote 
+              nutrient management and soil conservation.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#soilHealthModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Micro Irrigation -->
+      <div class="col-md-4 scheme-card" data-title="Micro Irrigation" data-category="subsidy">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Subsidy</span>
+            <h5 class="mt-2">Per Drop More Crop</h5>
+            <p class="text-muted">
+              Promotes micro irrigation (drip & sprinkler) to improve water use 
+              efficiency in agriculture with up to 55% subsidy.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#microIrrigationModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organic Farming -->
+      <div class="col-md-4 scheme-card" data-title="Organic Farming" data-category="subsidy">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Subsidy</span>
+            <h5 class="mt-2">Paramparagat Krishi Vikas Yojana</h5>
+            <p class="text-muted">
+              Promotes organic farming through cluster approach and 
+              PGS certification with financial assistance.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#organicFarmingModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dairy Development -->
+      <div class="col-md-4 scheme-card" data-title="Dairy Development" data-category="livestock">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Livestock</span>
+            <h5 class="mt-2">National Dairy Plan</h5>
+            <p class="text-muted">
+              Aims to improve milk productivity and provide rural milk producers 
+              with greater access to the organized milk processing sector.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#dairyModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farm Mechanization -->
+      <div class="col-md-4 scheme-card" data-title="Farm Mechanization" data-category="subsidy">
+        <div class="card h-100">
+          <div class="card-body">
+            <span class="scheme-category">Subsidy</span>
+            <h5 class="mt-2">Sub-Mission on Agricultural Mechanization</h5>
+            <p class="text-muted">
+              Promotes agricultural mechanization among small and marginal farmers 
+              through financial assistance for equipment purchase.
+            </p>
+            <button class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#mechanizationModal">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Apply Section -->
+  <section class="mt-5 pt-4 reveal delay-2"> <!-- Added pt-4 -->
+    <div class="row">
+      <div class="col-lg-8 px-3"> <!-- Added px-3 -->
+        <h3>How to Apply for Schemes</h3>
+        <div class="scheme-timeline">
+          <div class="timeline-item">
+            <h5>Step 1: Check Eligibility</h5>
+            <p class="text-muted">Verify if you meet the scheme's criteria including landholding size, 
+              income level, and other requirements.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Step 2: Gather Documents</h5>
+            <p class="text-muted">Collect necessary documents like Aadhaar card, land records, 
+              bank details, and identity proof.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Step 3: Visit Portal/Office</h5>
+            <p class="text-muted">Apply online through the official portal or visit your nearest 
+              agriculture department office.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Step 4: Submit Application</h5>
+            <p class="text-muted">Fill the application form accurately and submit with all 
+              required documents.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Step 5: Track Status</h5>
+            <p class="text-muted">Use your application ID to track the status online or 
+              through helpline numbers.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 px-3"> <!-- Added px-3 -->
+        <div class="scheme-feature-box">
+          <h5>📞 Need Help?</h5>
+          <p class="text-muted">Our scheme experts are here to assist you:</p>
+          <ul class="mt-3">
+            <li>Helpline: 1800-180-1551</li>
+            <li>Email: schemes@farmerportal.in</li>
+            <li>WhatsApp: +91-9876543210</li>
+          </ul>
+          <div class="mt-4">
+            <a href="contact.html" class="apply-btn w-100 text-center">
+              <i class="fas fa-headset me-2"></i> Contact Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scheme Categories -->
+  <section class="mt-5 pt-4 reveal delay-3"> <!-- Added pt-4 -->
+    <h3>Scheme Categories</h3>
+    <div class="row g-3 mt-3">
+      <div class="col-md-3">
+        <div class="card text-center p-4">
+          <div class="feature-icon mx-auto">
+            💰
+          </div>
+          <h5 class="mt-3">Financial Support</h5>
+          <p class="text-muted small">Direct benefit transfer and income support schemes</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-4">
+          <div class="feature-icon mx-auto">
+            🛡️
+          </div>
+          <h5 class="mt-3">Insurance</h5>
+          <p class="text-muted small">Crop and livestock insurance schemes</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-4">
+          <div class="feature-icon mx-auto">
+            💧
+          </div>
+          <h5 class="mt-3">Irrigation</h5>
+          <p class="text-muted small">Water management and irrigation schemes</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-4">
+          <div class="feature-icon mx-auto">
+            🌱
+          </div>
+          <h5 class="mt-3">Organic Farming</h5>
+          <p class="text-muted small">Sustainable and organic farming initiatives</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main> <!-- End of main container with padding -->
+
+<!-- PM Kisan Modal -->
+<div class="modal fade" id="pmkisanModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">PM Kisan Samman Nidhi Scheme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6>Scheme Overview</h6>
+        <p>The Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) is a Central Sector Scheme with 100% funding from Government of India.</p>
+        
+        <h6 class="mt-4">Financial Benefits</h6>
+        <ul>
+          <li>₹6,000 per year in three equal installments</li>
+          <li>Direct Benefit Transfer to bank accounts</li>
+          <li>No intermediaries involved</li>
+        </ul>
+        
+        <h6 class="mt-4">Eligibility Criteria</h6>
+        <ul>
+          <li>All landholding farmer families</li>
+          <li>Small and marginal farmers</li>
+          <li>Valid Aadhaar card required</li>
+          <li>Active bank account needed</li>
+        </ul>
+        
+        <h6 class="mt-4">Exclusion Categories</h6>
+        <ul>
+          <li>Institutional landholders</li>
+          <li>Former and present holders of constitutional posts</li>
+          <li>Professional tax payers</li>
+          <li>Pensioners drawing ₹10,000+ per month</li>
+        </ul>
+        
+        <div class="mt-4">
+          <a href="#" class="apply-btn">Apply Now</a>
+          <a href="#" class="btn btn-outline-primary ms-2">Check Status</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Other modals would follow similar structure -->
+
+<footer class="site-footer mt-5">
+  <div class="container container-max">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Farmer Portal</h5>
+        <p class="text-muted">
+          A digital initiative to support farmers with knowledge and tools.
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="crops.html">Crops</a></li>
+          <li><a href="weather.html">Weather</a></li>
+          <li><a href="schemes.html">Schemes</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Contact</h6>
+        <small class="text-muted">support@farmerportal.demo</small>
+      </div>
+    </div>
+
+    <hr>
+    <div class="text-center text-muted">
+      © 2025 Farmer Support & Innovation Portal
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterSchemes(query){
+  const cards = document.querySelectorAll('.scheme-card');
+  const q = query.trim().toLowerCase();
+  
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    const category = card.dataset.category.toLowerCase();
+    const content = card.textContent.toLowerCase();
+    
+    if (title.includes(q) || category.includes(q) || content.includes(q)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Show message if no results
+  const results = document.querySelectorAll('.scheme-card[style="display: block"]');
+  const message = document.getElementById('no-results-message');
+  
+  if (results.length === 0 && q !== '') {
+    if (!message) {
+      const msg = document.createElement('div');
+      msg.id = 'no-results-message';
+      msg.className = 'alert alert-warning mt-3';
+      msg.innerHTML = `No schemes found for "<strong>${query}</strong>". Try different keywords.`;
+      document.querySelector('#featured-schemes').appendChild(msg);
+    }
+  } else if (message) {
+    message.remove();
+  }
+}
+</script>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

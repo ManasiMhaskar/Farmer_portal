@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmer Tools | Farmer Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Additional styles for tools page */
+    .tools-hero {
+      background: linear-gradient(rgba(46, 125, 50, 0.85), rgba(33, 150, 243, 0.85)), 
+                  url('assets/img/tools-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .tools-hero h1, .tools-hero p {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .tool-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      height: 100%;
+      transition: all 0.3s ease;
+      border-top: 4px solid #2E7D32;
+    }
+    
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .tool-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #2E7D32;
+    }
+    
+    .calculator-section {
+      background: linear-gradient(135deg, #f8ffd8, #e1f5fe);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+    
+    .input-group-tool {
+      margin-bottom: 20px;
+    }
+    
+    .input-group-tool label {
+      font-weight: 600;
+      color: #2E7D32;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .input-group-tool .form-control,
+    .input-group-tool .form-select {
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .input-group-tool .form-control:focus,
+    .input-group-tool .form-select:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+    
+    .result-box {
+      background: #e8f5e9;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      border-left: 4px solid #4CAF50;
+    }
+    
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2E7D32;
+      margin: 10px 0;
+    }
+    
+    .tool-tabs {
+      margin: 30px 0;
+    }
+    
+    .nav-tabs .nav-link {
+      color: #666;
+      font-weight: 600;
+      padding: 12px 25px;
+      border-radius: 10px 10px 0 0;
+      border: none;
+      margin-right: 5px;
+    }
+    
+    .nav-tabs .nav-link.active {
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      color: white;
+    }
+    
+    .tab-content {
+      background: white;
+      border-radius: 0 10px 10px 10px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .converter-tool {
+      background: linear-gradient(135deg, #fff8e1, #f3e5f5);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+    }
+    
+    .converter-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .converter-arrow {
+      font-size: 2rem;
+      color: #FF9800;
+      text-align: center;
+    }
+    
+    .conversion-rate {
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .quick-tool {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .quick-tool:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .quick-tool-icon {
+      font-size: 2rem;
+      color: #2E7D32;
+      margin-bottom: 10px;
+    }
+    
+    .history-section {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    
+    .history-item {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 3px solid #4CAF50;
+    }
+    
+    .save-btn {
+      background: linear-gradient(135deg, #2196F3, #1976D2);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .save-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+    
+    .download-results {
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .converter-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .converter-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container container-max">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="assets/img/logo1.png" alt="Logo"
+           style="height:80px;width:80px;border-radius:8px;object-fit:cover;margin-right:10px;">
+      <strong>Farmer Portal</strong>
+    </a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="crops.html">Crops</a></li>
+        <li class="nav-item"><a class="nav-link" href="weather.html">Weather</a></li>
+        <li class="nav-item"><a class="nav-link" href="fertilizer.html">Fertilizer</a></li>
+        <li class="nav-item"><a class="nav-link" href="schemes.html">Schemes</a></li>
+        <li class="nav-item"><a class="nav-link active" href="tools.html">Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="height:90px"></div>
+
+<main class="container container-max page-enter py-5">
+  <!-- Hero Section -->
+  <section class="tools-hero reveal">
+    <div class="row align-items-center mx-auto">
+      <div class="col-lg-8">
+        <h1>Farmer's Digital Toolkit</h1>
+        <p class="lead">Advanced calculators, converters, and planning tools to optimize your farming operations, 
+          maximize profits, and make informed decisions.</p>
+      </div>
+      <div class="col-lg-4 text-center">
+        <div class="row">
+          <div class="col-6 mb-3">
+            <div class="tool-card">
+              <div class="tool-icon">🧮</div>
+              <h5>10+ Calculators</h5>
+            </div>
+          </div>
+          <div class="col-6 mb-3">
+            <div class="tool-card">
+              <div class="tool-icon">📊</div>
+              <h5>Real-time Results</h5>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tool-card">
+              <div class="tool-icon">💾</div>
+              <h5>Save & Export</h5>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tool-card">
+              <div class="tool-icon">📱</div>
+              <h5>Mobile Friendly</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Navigation Tabs -->
+  <div class="tool-tabs reveal delay-1">
+    <ul class="nav nav-tabs" id="toolsTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="calculators-tab" data-bs-toggle="tab" data-bs-target="#calculators" type="button">
+          🧮 Calculators
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="converters-tab" data-bs-toggle="tab" data-bs-target="#converters" type="button">
+          🔄 Converters
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="planners-tab" data-bs-toggle="tab" data-bs-target="#planners" type="button">
+          📅 Planners
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button">
+          📊 Analytics
+        </button>
+      </li>
+    </ul>
+    
+    <div class="tab-content" id="toolsTabContent">
+      <!-- Calculators Tab -->
+      <div class="tab-pane fade show active" id="calculators" role="tabpanel">
+        <div class="row">
+          <!-- Seed Calculator -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>🌱 Seed Calculator</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="seedCrop">
+                  <option value="wheat">Wheat</option>
+                  <option value="rice">Rice</option>
+                  <option value="corn">Corn</option>
+                  <option value="cotton">Cotton</option>
+                  <option value="soybean">Soybean</option>
+                  <option value="pulses">Pulses</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Area (Hectares)</label>
+                <input type="number" class="form-control" id="seedArea" value="1" min="0.1" step="0.1">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Spacing Method</label>
+                <select class="form-select" id="seedSpacing">
+                  <option value="normal">Normal Spacing</option>
+                  <option value="close">Close Spacing</option>
+                  <option value="wide">Wide Spacing</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Seed Rate Adjustment (%)</label>
+                <input type="range" class="form-range" id="seedAdjustment" min="80" max="120" value="100">
+                <div class="d-flex justify-content-between">
+                  <small>-20%</small>
+                  <small id="adjustmentValue">100%</small>
+                  <small>+20%</small>
+                </div>
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="calculateSeed()">Calculate Seed Requirement</button>
+              
+              <div class="result-box">
+                <h6>Seed Requirement:</h6>
+                <div class="result-value" id="seedResult">-- kg</div>
+                <div class="small text-muted" id="seedDetails"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fertilizer Calculator -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>🧪 Fertilizer Calculator</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="fertCrop">
+                  <option value="wheat">Wheat</option>
+                  <option value="rice">Rice</option>
+                  <option value="corn">Corn</option>
+                  <option value="cotton">Cotton</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Area (Hectares)</label>
+                <input type="number" class="form-control" id="fertArea" value="1" min="0.1" step="0.1">
+              </div>
+              
+              <div class="row">
+                <div class="col-4">
+                  <div class="input-group-tool">
+                    <label>N (kg/ha)</label>
+                    <input type="number" class="form-control" id="fertN" value="120">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="input-group-tool">
+                    <label>P (kg/ha)</label>
+                    <input type="number" class="form-control" id="fertP" value="60">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="input-group-tool">
+                    <label>K (kg/ha)</label>
+                    <input type="number" class="form-control" id="fertK" value="40">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Fertilizer Type</label>
+                <select class="form-select" id="fertType">
+                  <option value="urea">Urea (46% N)</option>
+                  <option value="dap">DAP (18% N, 46% P)</option>
+                  <option value="mop">MOP (60% K)</option>
+                  <option value="complex">Complex (NPK)</option>
+                </select>
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="calculateFertilizer()">Calculate Fertilizer</button>
+              
+              <div class="result-box">
+                <h6>Fertilizer Required:</h6>
+                <div class="result-value" id="fertResult">-- kg</div>
+                <div class="small text-muted" id="fertDetails"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Water Calculator -->
+          <div class="col-md-6 mt-4">
+            <div class="calculator-section">
+              <h4>💧 Water Requirement Calculator</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="waterCrop">
+                  <option value="rice">Rice (Paddy)</option>
+                  <option value="wheat">Wheat</option>
+                  <option value="sugarcane">Sugarcane</option>
+                  <option value="cotton">Cotton</option>
+                  <option value="vegetables">Vegetables</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Area (Hectares)</label>
+                <input type="number" class="form-control" id="waterArea" value="1" min="0.1" step="0.1">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Irrigation Method</label>
+                <select class="form-select" id="waterMethod">
+                  <option value="flood">Flood Irrigation</option>
+                  <option value="drip">Drip Irrigation</option>
+                  <option value="sprinkler">Sprinkler</option>
+                  <option value="furrow">Furrow</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Growth Stage</label>
+                <select class="form-select" id="waterStage">
+                  <option value="initial">Initial</option>
+                  <option value="vegetative">Vegetative</option>
+                  <option value="flowering">Flowering</option>
+                  <option value="maturity">Maturity</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Soil Type</label>
+                <select class="form-select" id="waterSoil">
+                  <option value="sandy">Sandy</option>
+                  <option value="loam">Loam</option>
+                  <option value="clay">Clay</option>
+                </select>
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="calculateWater()">Calculate Water Needs</button>
+              
+              <div class="result-box">
+                <h6>Water Required:</h6>
+                <div class="result-value" id="waterResult">-- m³</div>
+                <div class="small text-muted" id="waterDetails"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profit Calculator -->
+          <div class="col-md-6 mt-4">
+            <div class="calculator-section">
+              <h4>💰 Profit Calculator</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="profitCrop">
+                  <option value="wheat">Wheat</option>
+                  <option value="rice">Rice</option>
+                  <option value="cotton">Cotton</option>
+                  <option value="sugarcane">Sugarcane</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Area (Hectares)</label>
+                <input type="number" class="form-control" id="profitArea" value="1" min="0.1" step="0.1">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Expected Yield (kg/ha)</label>
+                <input type="number" class="form-control" id="profitYield" value="4000">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Market Price (₹/kg)</label>
+                <input type="number" class="form-control" id="profitPrice" value="25">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Production Cost (₹/ha)</label>
+                <input type="number" class="form-control" id="profitCost" value="30000">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Transport & Other Costs (₹)</label>
+                <input type="number" class="form-control" id="profitOther" value="5000">
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="calculateProfit()">Calculate Profit</button>
+              
+              <div class="result-box">
+                <h6>Profit Analysis:</h6>
+                <div class="result-value" id="profitResult">-- ₹</div>
+                <div class="small text-muted" id="profitDetails"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Converters Tab -->
+      <div class="tab-pane fade" id="converters" role="tabpanel">
+        <div class="row">
+          <!-- Area Converter -->
+          <div class="col-md-6">
+            <div class="converter-tool">
+              <h4>📏 Area Converter</h4>
+              <div class="converter-grid">
+                <div>
+                  <input type="number" class="form-control" id="areaFrom" value="1">
+                  <select class="form-select mt-2" id="areaFromUnit">
+                    <option value="hectare">Hectare (ha)</option>
+                    <option value="acre">Acre</option>
+                    <option value="bigha">Bigha</option>
+                    <option value="guntha">Guntha</option>
+                    <option value="sqm">Square Meter</option>
+                  </select>
+                </div>
+                
+                <div class="converter-arrow">⇄</div>
+                
+                <div>
+                  <input type="number" class="form-control" id="areaTo" readonly>
+                  <select class="form-select mt-2" id="areaToUnit">
+                    <option value="acre">Acre</option>
+                    <option value="hectare">Hectare (ha)</option>
+                    <option value="bigha">Bigha</option>
+                    <option value="guntha">Guntha</option>
+                    <option value="sqm">Square Meter</option>
+                  </select>
+                </div>
+              </div>
+              <div class="conversion-rate" id="areaRate"></div>
+              <button class="btn btn-primary w-100 mt-3" onclick="convertArea()">Convert Area</button>
+            </div>
+          </div>
+
+          <!-- Weight Converter -->
+          <div class="col-md-6">
+            <div class="converter-tool">
+              <h4>⚖️ Weight Converter</h4>
+              <div class="converter-grid">
+                <div>
+                  <input type="number" class="form-control" id="weightFrom" value="100">
+                  <select class="form-select mt-2" id="weightFromUnit">
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="quintal">Quintal (q)</option>
+                    <option value="ton">Metric Ton</option>
+                    <option value="pound">Pound (lb)</option>
+                  </select>
+                </div>
+                
+                <div class="converter-arrow">⇄</div>
+                
+                <div>
+                  <input type="number" class="form-control" id="weightTo" readonly>
+                  <select class="form-select mt-2" id="weightToUnit">
+                    <option value="quintal">Quintal (q)</option>
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="ton">Metric Ton</option>
+                    <option value="pound">Pound (lb)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="conversion-rate" id="weightRate"></div>
+              <button class="btn btn-primary w-100 mt-3" onclick="convertWeight()">Convert Weight</button>
+            </div>
+          </div>
+
+          <!-- Currency Converter -->
+          <div class="col-md-6 mt-4">
+            <div class="converter-tool">
+              <h4>💱 Currency Converter</h4>
+              <div class="converter-grid">
+                <div>
+                  <input type="number" class="form-control" id="currencyFrom" value="100">
+                  <select class="form-select mt-2" id="currencyFromUnit">
+                    <option value="INR">Indian Rupee (₹)</option>
+                    <option value="USD">US Dollar ($)</option>
+                    <option value="EUR">Euro (€)</option>
+                    <option value="GBP">British Pound (£)</option>
+                  </select>
+                </div>
+                
+                <div class="converter-arrow">⇄</div>
+                
+                <div>
+                  <input type="number" class="form-control" id="currencyTo" readonly>
+                  <select class="form-select mt-2" id="currencyToUnit">
+                    <option value="USD">US Dollar ($)</option>
+                    <option value="INR">Indian Rupee (₹)</option>
+                    <option value="EUR">Euro (€)</option>
+                    <option value="GBP">British Pound (£)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="conversion-rate" id="currencyRate"></div>
+              <button class="btn btn-primary w-100 mt-3" onclick="convertCurrency()">Convert Currency</button>
+            </div>
+          </div>
+
+          <!-- Volume Converter -->
+          <div class="col-md-6 mt-4">
+            <div class="converter-tool">
+              <h4>🧴 Volume Converter</h4>
+              <div class="converter-grid">
+                <div>
+                  <input type="number" class="form-control" id="volumeFrom" value="1000">
+                  <select class="form-select mt-2" id="volumeFromUnit">
+                    <option value="liter">Liter (L)</option>
+                    <option value="gallon">Gallon</option>
+                    <option value="cubicmeter">Cubic Meter (m³)</option>
+                    <option value="barrel">Barrel</option>
+                  </select>
+                </div>
+                
+                <div class="converter-arrow">⇄</div>
+                
+                <div>
+                  <input type="number" class="form-control" id="volumeTo" readonly>
+                  <select class="form-select mt-2" id="volumeToUnit">
+                    <option value="gallon">Gallon</option>
+                    <option value="liter">Liter (L)</option>
+                    <option value="cubicmeter">Cubic Meter (m³)</option>
+                    <option value="barrel">Barrel</option>
+                  </select>
+                </div>
+              </div>
+              <div class="conversion-rate" id="volumeRate"></div>
+              <button class="btn btn-primary w-100 mt-3" onclick="convertVolume()">Convert Volume</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Planners Tab -->
+      <div class="tab-pane fade" id="planners" role="tabpanel">
+        <div class="row">
+          <!-- Crop Rotation Planner -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>🔄 Crop Rotation Planner</h4>
+              <div class="input-group-tool">
+                <label>Current Crop</label>
+                <select class="form-select" id="currentCrop">
+                  <option value="rice">Rice</option>
+                  <option value="wheat">Wheat</option>
+                  <option value="pulses">Pulses</option>
+                  <option value="vegetables">Vegetables</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Soil Type</label>
+                <select class="form-select" id="rotationSoil">
+                  <option value="clay">Clay</option>
+                  <option value="loam">Loam</option>
+                  <option value="sandy">Sandy</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Rotation Cycle (Years)</label>
+                <select class="form-select" id="rotationCycle">
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Years</option>
+                  <option value="3">3 Years</option>
+                  <option value="4">4 Years</option>
+                </select>
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="planRotation()">Generate Rotation Plan</button>
+              
+              <div class="result-box">
+                <h6>Recommended Rotation:</h6>
+                <div id="rotationResult">
+                  <p class="small">Select crops and click generate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Irrigation Schedule -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>⏰ Irrigation Schedule</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="scheduleCrop">
+                  <option value="rice">Rice</option>
+                  <option value="wheat">Wheat</option>
+                  <option value="sugarcane">Sugarcane</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Growth Stage</label>
+                <select class="form-select" id="scheduleStage">
+                  <option value="germination">Germination</option>
+                  <option value="vegetative">Vegetative</option>
+                  <option value="flowering">Flowering</option>
+                  <option value="maturity">Maturity</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Soil Moisture (%)</label>
+                <input type="number" class="form-control" id="soilMoisture" value="60" min="0" max="100">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Weather Forecast</label>
+                <select class="form-select" id="weatherForecast">
+                  <option value="sunny">Sunny</option>
+                  <option value="cloudy">Cloudy</option>
+                  <option value="rain">Rain Expected</option>
+                </select>
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="generateSchedule()">Generate Schedule</button>
+              
+              <div class="result-box">
+                <h6>Irrigation Schedule:</h6>
+                <div id="scheduleResult">
+                  <p class="small">Select parameters and click generate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Tab -->
+      <div class="tab-pane fade" id="analytics" role="tabpanel">
+        <div class="row">
+          <!-- Yield Prediction -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>📈 Yield Prediction</h4>
+              <div class="input-group-tool">
+                <label>Crop Type</label>
+                <select class="form-select" id="predictCrop">
+                  <option value="wheat">Wheat</option>
+                  <option value="rice">Rice</option>
+                  <option value="corn">Corn</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Area (Hectares)</label>
+                <input type="number" class="form-control" id="predictArea" value="2">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Soil Fertility</label>
+                <select class="form-select" id="soilFertility">
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Rainfall (mm/season)</label>
+                <input type="number" class="form-control" id="rainfall" value="800">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Fertilizer Used (kg/ha)</label>
+                <input type="number" class="form-control" id="fertUsed" value="150">
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="predictYield()">Predict Yield</button>
+              
+              <div class="result-box">
+                <h6>Predicted Yield:</h6>
+                <div class="result-value" id="predictResult">-- tons</div>
+                <div class="small text-muted" id="predictDetails"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cost Analysis -->
+          <div class="col-md-6">
+            <div class="calculator-section">
+              <h4>📋 Cost Analysis</h4>
+              <div class="input-group-tool">
+                <label>Input Costs (₹)</label>
+                <input type="number" class="form-control" id="inputCost" value="20000" placeholder="Seeds, Fertilizers, etc.">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Labor Costs (₹)</label>
+                <input type="number" class="form-control" id="laborCost" value="15000">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Equipment Costs (₹)</label>
+                <input type="number" class="form-control" id="equipmentCost" value="10000">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Irrigation Costs (₹)</label>
+                <input type="number" class="form-control" id="irrigationCost" value="5000">
+              </div>
+              
+              <div class="input-group-tool">
+                <label>Other Costs (₹)</label>
+                <input type="number" class="form-control" id="otherCost" value="3000">
+              </div>
+              
+              <button class="btn btn-primary w-100" onclick="analyzeCosts()">Analyze Costs</button>
+              
+              <div class="result-box">
+                <h6>Cost Breakdown:</h6>
+                <div id="costResult">
+                  <p class="small">Enter costs and click analyze</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Tools Grid -->
+  <section class="mt-5 reveal delay-2">
+    <h3>Quick Tools</h3>
+    <div class="tools-grid">
+      <div class="quick-tool" onclick="openCalculator('seed')">
+        <div class="quick-tool-icon">🌱</div>
+        <h6>Seed Rate</h6>
+        <p class="small text-muted">Quick seed calculation</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openCalculator('fert')">
+        <div class="quick-tool-icon">🧪</div>
+        <h6>Fertilizer Mix</h6>
+        <p class="small text-muted">NPK calculator</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openCalculator('water')">
+        <div class="quick-tool-icon">💧</div>
+        <h6>Water Needs</h6>
+        <p class="small text-muted">Irrigation calculator</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openCalculator('profit')">
+        <div class="quick-tool-icon">💰</div>
+        <h6>Profit Estimator</h6>
+        <p class="small text-muted">Quick profit check</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openConverter('area')">
+        <div class="quick-tool-icon">📏</div>
+        <h6>Area Convert</h6>
+        <p class="small text-muted">Hectare to Acre</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openConverter('weight')">
+        <div class="quick-tool-icon">⚖️</div>
+        <h6>Weight Convert</h6>
+        <p class="small text-muted">Kg to Quintal</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openPlanner('rotation')">
+        <div class="quick-tool-icon">🔄</div>
+        <h6>Crop Rotation</h6>
+        <p class="small text-muted">Rotation planning</p>
+      </div>
+      
+      <div class="quick-tool" onclick="openPlanner('schedule')">
+        <div class="quick-tool-icon">⏰</div>
+        <h6>Irrigation</h6>
+        <p class="small text-muted">Schedule generator</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculation History -->
+  <section class="history-section reveal delay-3">
+    <h4>📋 Calculation History</h4>
+    <div id="historyList">
+      <p class="text-muted">Your calculations will appear here</p>
+    </div>
+    <div class="text-end">
+      <button class="btn btn-outline-secondary btn-sm" onclick="clearHistory()">Clear History</button>
+      <button class="btn btn-primary btn-sm ms-2" onclick="saveResults()">Save Results</button>
+    </div>
+  </section>
+
+  <!-- Download Results -->
+  <div class="download-results reveal delay-3">
+    <h5>Export Your Calculations</h5>
+    <p class="text-muted">Download your calculation results for future reference</p>
+    <div class="row mt-3">
+      <div class="col-md-3 mb-2">
+        <button class="btn btn-outline-primary w-100" onclick="exportPDF()">📄 PDF</button>
+      </div>
+      <div class="col-md-3 mb-2">
+        <button class="btn btn-outline-success w-100" onclick="exportExcel()">📊 Excel</button>
+      </div>
+      <div class="col-md-3 mb-2">
+        <button class="btn btn-outline-info w-100" onclick="printResults()">🖨️ Print</button>
+      </div>
+      <div class="col-md-3 mb-2">
+        <button class="btn btn-outline-dark w-100" onclick="shareResults()">📱 Share</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer mt-5">
+  <div class="container container-max">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Farmer Portal</h5>
+        <p class="text-muted">
+          A digital initiative to support farmers with knowledge and tools.
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="crops.html">Crops</a></li>
+          <li><a href="weather.html">Weather</a></li>
+          <li><a href="schemes.html">Schemes</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Contact</h6>
+        <small class="text-muted">support@farmerportal.demo</small>
+      </div>
+    </div>
+
+    <hr>
+    <div class="text-center text-muted">
+      © 2025 Farmer Support & Innovation Portal
+    </div>
+  </div>
+</footer>
+
+<script>
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+  // Set up slider value display
+  const adjustmentSlider = document.getElementById('seedAdjustment');
+  const adjustmentValue = document.getElementById('adjustmentValue');
+  
+  adjustmentSlider.addEventListener('input', function() {
+    adjustmentValue.textContent = this.value + '%';
+  });
+  
+  // Initialize converters
+  convertArea();
+  convertWeight();
+  convertCurrency();
+  convertVolume();
+  
+  // Load history from localStorage
+  loadHistory();
+});
+
+// Seed Calculator
+function calculateSeed() {
+  const crop = document.getElementById('seedCrop').value;
+  const area = parseFloat(document.getElementById('seedArea').value);
+  const spacing = document.getElementById('seedSpacing').value;
+  const adjustment = parseFloat(document.getElementById('seedAdjustment').value) / 100;
+  
+  if (isNaN(area) || area <= 0) {
+    alert('Please enter a valid area');
+    return;
+  }
+  
+  // Seed rates in kg/ha
+  const seedRates = {
+    wheat: { normal: 100, close: 120, wide: 80 },
+    rice: { normal: 40, close: 50, wide: 30 },
+    corn: { normal: 20, close: 25, wide: 15 },
+    cotton: { normal: 5, close: 6, wide: 4 },
+    soybean: { normal: 80, close: 100, wide: 60 },
+    pulses: { normal: 30, close: 35, wide: 25 }
+  };
+  
+  const cropData = seedRates[crop] || seedRates.wheat;
+  const baseRate = cropData[spacing] || cropData.normal;
+  const adjustedRate = baseRate * adjustment;
+  const seedsNeeded = area * adjustedRate;
+  
+  document.getElementById('seedResult').textContent = seedsNeeded.toFixed(2) + ' kg';
+  document.getElementById('seedDetails').textContent = 
+    `Base rate: ${baseRate} kg/ha × Area: ${area} ha × Adjustment: ${adjustment * 100}%`;
+  
+  addToHistory('Seed Calculator', `${seedsNeeded.toFixed(2)} kg for ${area} ha ${crop}`);
+}
+
+// Fertilizer Calculator
+function calculateFertilizer() {
+  const crop = document.getElementById('fertCrop').value;
+  const area = parseFloat(document.getElementById('fertArea').value);
+  const N = parseFloat(document.getElementById('fertN').value);
+  const P = parseFloat(document.getElementById('fertP').value);
+  const K = parseFloat(document.getElementById('fertK').value);
+  const type = document.getElementById('fertType').value;
+  
+  if (isNaN(area) || area <= 0) {
+    alert('Please enter a valid area');
+    return;
+  }
+  
+  // Calculate based on fertilizer type
+  let ureaNeeded = 0;
+  let dapNeeded = 0;
+  let mopNeeded = 0;
+  let total = 0;
+  
+  // Urea (46% N)
+  if (N > 0) {
+    ureaNeeded = (area * N) / 0.46;
+  }
+  
+  // DAP (18% N, 46% P)
+  if (P > 0) {
+    dapNeeded = (area * P) / 0.46;
+  }
+  
+  // MOP (60% K)
+  if (K > 0) {
+    mopNeeded = (area * K) / 0.60;
+  }
+  
+  total = ureaNeeded + dapNeeded + mopNeeded;
+  
+  let details = '';
+  if (ureaNeeded > 0) details += `Urea: ${ureaNeeded.toFixed(2)} kg<br>`;
+  if (dapNeeded > 0) details += `DAP: ${dapNeeded.toFixed(2)} kg<br>`;
+  if (mopNeeded > 0) details += `MOP: ${mopNeeded.toFixed(2)} kg<br>`;
+  
+  document.getElementById('fertResult').textContent = total.toFixed(2) + ' kg';
+  document.getElementById('fertDetails').innerHTML = details;
+  
+  addToHistory('Fertilizer Calculator', `${total.toFixed(2)} kg for ${area} ha`);
+}
+
+// Water Calculator
+function calculateWater() {
+  const crop = document.getElementById('waterCrop').value;
+  const area = parseFloat(document.getElementById('waterArea').value);
+  const method = document.getElementById('waterMethod').value;
+  const stage = document.getElementById('waterStage').value;
+  const soil = document.getElementById('waterSoil').value;
+  
+  if (isNaN(area) || area <= 0) {
+    alert('Please enter a valid area');
+    return;
+  }
+  
+  // Base water requirements in m³/ha
+  const baseWater = {
+    rice: 12000,
+    wheat: 4000,
+    sugarcane: 20000,
+    cotton: 6000,
+    vegetables: 8000
+  };
+  
+  // Efficiency factors
+  const efficiency = {
+    flood: 0.6,
+    drip: 0.9,
+    sprinkler: 0.8,
+    furrow: 0.7
+  };
+  
+  // Stage multipliers
+  const stageMulti = {
+    initial: 0.5,
+    vegetative: 1.0,
+    flowering: 1.2,
+    maturity: 0.8
+  };
+  
+  // Soil multipliers
+  const soilMulti = {
+    sandy: 1.3,
+    loam: 1.0,
+    clay: 0.8
+  };
+  
+  const base = baseWater[crop] || 5000;
+  const waterNeeded = area * base * (efficiency[method] || 0.7) * (stageMulti[stage] || 1) * (soilMulti[soil] || 1);
+  
+  document.getElementById('waterResult').textContent = waterNeeded.toFixed(2) + ' m³';
+  document.getElementById('waterDetails').textContent = 
+    `Crop: ${crop}, Method: ${method}, Stage: ${stage}, Soil: ${soil}`;
+  
+  addToHistory('Water Calculator', `${waterNeeded.toFixed(2)} m³ for ${area} ha`);
+}
+
+// Profit Calculator
+function calculateProfit() {
+  const crop = document.getElementById('profitCrop').value;
+  const area = parseFloat(document.getElementById('profitArea').value);
+  const yieldPerHa = parseFloat(document.getElementById('profitYield').value);
+  const price = parseFloat(document.getElementById('profitPrice').value);
+  const costPerHa = parseFloat(document.getElementById('profitCost').value);
+  const otherCosts = parseFloat(document.getElementById('profitOther').value);
+  
+  if (isNaN(area) || area <= 0) {
+    alert('Please enter a valid area');
+    return;
+  }
+  
+  const totalYield = area * yieldPerHa;
+  const revenue = totalYield * price;
+  const totalCost = (area * costPerHa) + otherCosts;
+  const profit = revenue - totalCost;
+  const profitMargin = (profit / revenue) * 100;
+  
+  let resultHTML = `
+    Revenue: ₹${revenue.toFixed(2)}<br>
+    Total Cost: ₹${totalCost.toFixed(2)}<br>
+    Profit: ₹${profit.toFixed(2)}<br>
+    Profit Margin: ${profitMargin.toFixed(2)}%<br>
+    Yield: ${totalYield.toFixed(2)} kg
+  `;
+  
+  let profitColor = profit >= 0 ? '#2E7D32' : '#F44336';
+  document.getElementById('profitResult').innerHTML = `<span style="color:${profitColor}">₹${profit.toFixed(2)}</span>`;
+  document.getElementById('profitDetails').innerHTML = resultHTML;
+  
+  addToHistory('Profit Calculator', `₹${profit.toFixed(2)} profit from ${area} ha ${crop}`);
+}
+
+// Area Converter
+function convertArea() {
+  const fromValue = parseFloat(document.getElementById('areaFrom').value);
+  const fromUnit = document.getElementById('areaFromUnit').value;
+  const toUnit = document.getElementById('areaToUnit').value;
+  
+  if (isNaN(fromValue)) {
+    alert('Please enter a valid number');
+    return;
+  }
+  
+  // Conversion to square meters
+  const toSqM = {
+    hectare: 10000,
+    acre: 4046.86,
+    bigha: 2500, // Approximate
+    guntha: 101.17,
+    sqm: 1
+  };
+  
+  // Convert to square meters first
+  const valueInSqM = fromValue * toSqM[fromUnit];
+  
+  // Convert to target unit
+  const result = valueInSqM / toSqM[toUnit];
+  
+  document.getElementById('areaTo').value = result.toFixed(4);
+  document.getElementById('areaRate').textContent = `1 ${fromUnit} = ${(toSqM[fromUnit] / toSqM[toUnit]).toFixed(4)} ${toUnit}`;
+}
+
+// Weight Converter
+function convertWeight() {
+  const fromValue = parseFloat(document.getElementById('weightFrom').value);
+  const fromUnit = document.getElementById('weightFromUnit').value;
+  const toUnit = document.getElementById('weightToUnit').value;
+  
+  if (isNaN(fromValue)) {
+    alert('Please enter a valid number');
+    return;
+  }
+  
+  // Conversion to kilograms
+  const toKg = {
+    kg: 1,
+    quintal: 100,
+    ton: 1000,
+    pound: 0.453592
+  };
+  
+  const valueInKg = fromValue * toKg[fromUnit];
+  const result = valueInKg / toKg[toUnit];
+  
+  document.getElementById('weightTo').value = result.toFixed(4);
+  document.getElementById('weightRate').textContent = `1 ${fromUnit} = ${(toKg[fromUnit] / toKg[toUnit]).toFixed(4)} ${toUnit}`;
+}
+
+// Currency Converter (using approximate rates)
+function convertCurrency() {
+  const fromValue = parseFloat(document.getElementById('currencyFrom').value);
+  const fromUnit = document.getElementById('currencyFromUnit').value;
+  const toUnit = document.getElementById('currencyToUnit').value;
+  
+  if (isNaN(fromValue)) {
+    alert('Please enter a valid number');
+    return;
+  }
+  
+  // Conversion rates to USD
+  const toUSD = {
+    INR: 0.012,  // 1 INR = 0.012 USD
+    USD: 1,
+    EUR: 1.08,   // 1 EUR = 1.08 USD
+    GBP: 1.27    // 1 GBP = 1.27 USD
+  };
+  
+  const valueInUSD = fromValue * toUSD[fromUnit];
+  const result = valueInUSD / toUSD[toUnit];
+  
+  document.getElementById('currencyTo').value = result.toFixed(2);
+  document.getElementById('currencyRate').textContent = `1 ${fromUnit} = ${(toUSD[fromUnit] / toUSD[toUnit]).toFixed(4)} ${toUnit}`;
+}
+
+// Volume Converter
+function convertVolume() {
+  const fromValue = parseFloat(document.getElementById('volumeFrom').value);
+  const fromUnit = document.getElementById('volumeFromUnit').value;
+  const toUnit = document.getElementById('volumeToUnit').value;
+  
+  if (isNaN(fromValue)) {
+    alert('Please enter a valid number');
+    return;
+  }
+  
+  // Conversion to liters
+  const toLiter = {
+    liter: 1,
+    gallon: 3.78541,
+    cubicmeter: 1000,
+    barrel: 158.987
+  };
+  
+  const valueInLiter = fromValue * toLiter[fromUnit];
+  const result = valueInLiter / toLiter[toUnit];
+  
+  document.getElementById('volumeTo').value = result.toFixed(4);
+  document.getElementById('volumeRate').textContent = `1 ${fromUnit} = ${(toLiter[fromUnit] / toLiter[toUnit]).toFixed(4)} ${toUnit}`;
+}
+
+// History Functions
+let calculationHistory = [];
+
+function addToHistory(tool, result) {
+  const historyItem = {
+    tool: tool,
+    result: result,
+    timestamp: new Date().toLocaleString()
+  };
+  
+  calculationHistory.unshift(historyItem); // Add to beginning
+  if (calculationHistory.length > 10) {
+    calculationHistory = calculationHistory.slice(0, 10); // Keep only last 10
+  }
+  
+  updateHistoryDisplay();
+  saveHistoryToStorage();
+}
+
+function updateHistoryDisplay() {
+  const historyList = document.getElementById('historyList');
+  
+  if (calculationHistory.length === 0) {
+    historyList.innerHTML = '<p class="text-muted">Your calculations will appear here</p>';
+    return;
+  }
+  
+  let html = '';
+  calculationHistory.forEach(item => {
+    html += `
+      <div class="history-item">
+        <strong>${item.tool}</strong><br>
+        <small>${item.result}</small><br>
+        <small class="text-muted">${item.timestamp}</small>
+      </div>
+    `;
+  });
+  
+  historyList.innerHTML = html;
+}
+
+function saveHistoryToStorage() {
+  localStorage.setItem('farmerToolsHistory', JSON.stringify(calculationHistory));
+}
+
+function loadHistory() {
+  const saved = localStorage.getItem('farmerToolsHistory');
+  if (saved) {
+    calculationHistory = JSON.parse(saved);
+    updateHistoryDisplay();
+  }
+}
+
+function clearHistory() {
+  if (confirm('Clear all calculation history?')) {
+    calculationHistory = [];
+    updateHistoryDisplay();
+    localStorage.removeItem('farmerToolsHistory');
+  }
+}
+
+function saveResults() {
+  alert('Results saved to your account!');
+  // In a real app, this would save to server/database
+}
+
+// Export functions (demo)
+function exportPDF() {
+  alert('PDF export feature would generate a PDF document with your calculations.');
+}
+
+function exportExcel() {
+  alert('Excel export feature would create a spreadsheet with your data.');
+}
+
+function printResults() {
+  window.print();
+}
+
+function shareResults() {
+  alert('Share feature would allow sharing calculations via email or social media.');
+}
+
+// Quick tool navigation
+function openCalculator(type) {
+  const tab = new bootstrap.Tab(document.getElementById('calculators-tab'));
+  tab.show();
+  
+  // Scroll to the specific calculator
+  setTimeout(() => {
+    const element = document.getElementById(`${type}Crop`);
+    if (element) element.focus();
+  }, 300);
+}
+
+function openConverter(type) {
+  const tab = new bootstrap.Tab(document.getElementById('converters-tab'));
+  tab.show();
+  
+  setTimeout(() => {
+    const element = document.getElementById(`${type}From`);
+    if (element) element.focus();
+  }, 300);
+}
+
+function openPlanner(type) {
+  const tab = new bootstrap.Tab(document.getElementById('planners-tab'));
+  tab.show();
+  
+  setTimeout(() => {
+    const element = type === 'rotation' ? document.getElementById('currentCrop') : document.getElementById('scheduleCrop');
+    if (element) element.focus();
+  }, 300);
+}
+
+// Additional calculator functions (simplified versions)
+function planRotation() {
+  const currentCrop = document.getElementById('currentCrop').value;
+  const rotationResult = document.getElementById('rotationResult');
+  
+  const recommendations = {
+    rice: ['Pulses → Vegetables → Wheat', 'Sugarcane → Pulses → Fallow'],
+    wheat: ['Pulses → Oilseeds → Vegetables', 'Mustard → Chickpea → Fallow'],
+    pulses: ['Cereals → Oilseeds → Vegetables', 'Wheat → Mustard → Fallow'],
+    vegetables: ['Cereals → Pulses → Fallow', 'Legumes → Cereals → Cover crops']
+  };
+  
+  const rec = recommendations[currentCrop] || ['Cereals → Pulses → Oilseeds', 'Rotate with leguminous crops'];
+  
+  rotationResult.innerHTML = `
+    <p><strong>Year 1:</strong> ${rec[0]}</p>
+    <p><strong>Year 2:</strong> ${rec[1]}</p>
+    <p class="small text-muted">Benefits: Improves soil health, breaks pest cycles, increases yield</p>
+  `;
+}
+
+function generateSchedule() {
+  const scheduleResult = document.getElementById('scheduleResult');
+  
+  scheduleResult.innerHTML = `
+    <p><strong>Next Irrigation:</strong> Tomorrow morning</p>
+    <p><strong>Duration:</strong> 2 hours</p>
+    <p><strong>Water Amount:</strong> 50 mm</p>
+    <p><strong>Frequency:</strong> Every 3 days</p>
+    <p class="small text-muted">Adjust based on actual soil moisture readings</p>
+  `;
+}
+
+function predictYield() {
+  const area = parseFloat(document.getElementById('predictArea').value);
+  const fertility = document.getElementById('soilFertility').value;
+  
+  const baseYield = 4; // tons/ha for medium fertility
+  const fertilityMulti = { high: 1.3, medium: 1.0, low: 0.7 };
+  
+  const predicted = area * baseYield * fertilityMulti[fertility];
+  
+  document.getElementById('predictResult').textContent = predicted.toFixed(2) + ' tons';
+  document.getElementById('predictDetails').textContent = 
+    `Based on ${fertility} soil fertility and ${area} ha area`;
+}
+
+function analyzeCosts() {
+  const inputCost = parseFloat(document.getElementById('inputCost').value) || 0;
+  const laborCost = parseFloat(document.getElementById('laborCost').value) || 0;
+  const equipmentCost = parseFloat(document.getElementById('equipmentCost').value) || 0;
+  const irrigationCost = parseFloat(document.getElementById('irrigationCost').value) || 0;
+  const otherCost = parseFloat(document.getElementById('otherCost').value) || 0;
+  
+  const total = inputCost + laborCost + equipmentCost + irrigationCost + otherCost;
+  
+  const costResult = document.getElementById('costResult');
+  costResult.innerHTML = `
+    <p><strong>Total Cost:</strong> ₹${total.toFixed(2)}</p>
+    <p><strong>Breakdown:</strong></p>
+    <p>Inputs: ${((inputCost/total)*100).toFixed(1)}%</p>
+    <p>Labor: ${((laborCost/total)*100).toFixed(1)}%</p>
+    <p>Equipment: ${((equipmentCost/total)*100).toFixed(1)}%</p>
+    <p>Irrigation: ${((irrigationCost/total)*100).toFixed(1)}%</p>
+    <p>Other: ${((otherCost/total)*100).toFixed(1)}%</p>
+  `;
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather & Climate | Farmer Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Additional styles for weather page */
+    .weather-hero {
+      background: linear-gradient(rgba(33, 150, 243, 0.85), rgba(76, 175, 80, 0.85)), 
+                  url('assets/img/weather-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .weather-hero h1, .weather-hero p {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .weather-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      height: 100%;
+      border-top: 4px solid #2196F3;
+    }
+    
+    .weather-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .weather-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .current-weather {
+      background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+    
+    .temperature-display {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2196F3, #4CAF50);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    
+    .weather-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .stat-item {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2196F3;
+    }
+    
+    .forecast-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px 0;
+      margin: 20px 0;
+    }
+    
+    .forecast-day {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      min-width: 150px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    
+    .forecast-icon {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+    
+    .forecast-temp {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2196F3;
+    }
+    
+    .weather-map {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .map-placeholder {
+      height: 250px;
+      background: linear-gradient(135deg, #bbdefb, #c8e6c9);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2196F3;
+      font-weight: 600;
+      margin: 15px 0;
+    }
+    
+    .crop-advisory {
+      background: linear-gradient(135deg, #fff8e1, #f3e5f5);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      border-left: 5px solid #FF9800;
+    }
+    
+    .alert-box {
+      background: linear-gradient(135deg, #ffebee, #ffccbc);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 5px solid #F44336;
+    }
+    
+    .location-selector {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    .weather-graph {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    
+    .graph-placeholder {
+      height: 200px;
+      background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-weight: 600;
+    }
+    
+    .hourly-forecast {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px 0;
+      margin: 20px 0;
+    }
+    
+    .hour-item {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      min-width: 120px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    
+    .weather-image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 30px 0;
+    }
+    
+    .weather-image {
+      height: 150px;
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.3s ease;
+    }
+    
+    .weather-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .seasonal-info {
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+    
+    .aqi-display {
+      background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .aqi-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #4CAF50;
+      min-width: 80px;
+    }
+    
+    .aqi-description {
+      flex: 1;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .weather-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .temperature-display {
+        font-size: 3rem;
+      }
+      
+      .weather-image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container container-max">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="assets/img/logo1.png" alt="Logo"
+           style="height:80px;width:80px;border-radius:8px;object-fit:cover;margin-right:10px;">
+      <strong>Farmer Portal</strong>
+    </a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="crops.html">Crops</a></li>
+        <li class="nav-item"><a class="nav-link active" href="weather.html">Weather</a></li>
+        <li class="nav-item"><a class="nav-link" href="fertilizer.html">Fertilizer</a></li>
+        <li class="nav-item"><a class="nav-link" href="schemes.html">Schemes</a></li>
+        <li class="nav-item"><a class="nav-link" href="tools.html">Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="height:90px"></div>
+
+<main class="container container-max page-enter py-5">
+  <!-- Hero Section -->
+  <section class="weather-hero reveal">
+    <div class="row align-items-center mx-auto">
+      <div class="col-lg-8">
+        <h1>Weather & Climate Intelligence</h1>
+        <p class="lead">Real-time weather updates, accurate forecasts, and climate insights 
+          tailored for agricultural planning and decision-making.</p>
+      </div>
+      <div class="col-lg-4 text-center">
+        <div class="weather-card">
+          <div class="weather-icon">🌤️</div>
+          <h3>Live Updates</h3>
+          <p class="mb-0">24/7 weather monitoring for farmers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Selector -->
+  <div class="location-selector reveal delay-1">
+    <h4>📍 Select Your Location</h4>
+    <div class="row g-3 mt-3">
+      <div class="col-md-4">
+        <label class="form-label">State</label>
+        <select class="form-select" id="stateSelect">
+          <option value="maharashtra">Maharashtra</option>
+          <option value="punjab">Punjab</option>
+          <option value="up">Uttar Pradesh</option>
+          <option value="karnataka">Karnataka</option>
+          <option value="gujarat">Gujarat</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">District</label>
+        <select class="form-select" id="districtSelect">
+          <option value="pune">Pune</option>
+          <option value="nagpur">Nagpur</option>
+          <option value="nashik">Nashik</option>
+          <option value="aurangabad">Aurangabad</option>
+          <option value="kolhapur">Kolhapur</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Village/Taluka</label>
+        <input type="text" class="form-control" id="villageInput" placeholder="Enter village name">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label class="form-label">Coordinates (Optional)</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Latitude" id="latInput">
+          <input type="text" class="form-control" placeholder="Longitude" id="lonInput">
+        </div>
+      </div>
+      <div class="col-md-6 d-flex align-items-end">
+        <button class="btn btn-primary w-100" onclick="getWeather()">
+          <span class="me-2">🌤️</span> Get Weather Forecast
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Weather Display -->
+  <section class="current-weather reveal delay-1">
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-center">
+        <div class="weather-icon" id="currentIcon">🌤️</div>
+        <div class="temperature-display" id="currentTemp">30°C</div>
+        <h4 id="currentCondition">Partly Cloudy</h4>
+        <p class="text-muted" id="currentLocation">Pune, Maharashtra</p>
+      </div>
+      <div class="col-lg-8">
+        <h4>Current Weather Conditions</h4>
+        <div class="weather-stats">
+          <div class="stat-item">
+            <div class="stat-label">Feels Like</div>
+            <div class="stat-value" id="feelsLike">32°C</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Humidity</div>
+            <div class="stat-value" id="humidity">65%</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Wind Speed</div>
+            <div class="stat-value" id="windSpeed">12 km/h</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Pressure</div>
+            <div class="stat-value" id="pressure">1013 hPa</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Visibility</div>
+            <div class="stat-value" id="visibility">10 km</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">UV Index</div>
+            <div class="stat-value" id="uvIndex">6</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Sunrise</div>
+            <div class="stat-value" id="sunrise">6:45 AM</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Sunset</div>
+            <div class="stat-value" id="sunset">6:30 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-Day Forecast -->
+  <section class="reveal delay-2">
+    <h4>📅 5-Day Forecast</h4>
+    <div class="forecast-container">
+      <!-- Forecast days will be added by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Hourly Forecast -->
+  <section class="reveal delay-2 mt-5">
+    <h4>🕐 24-Hour Forecast</h4>
+    <div class="hourly-forecast">
+      <!-- Hourly forecast will be added by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Weather Alerts -->
+  <div class="alert-box reveal delay-2">
+    <h5>⚠️ Weather Alerts</h5>
+    <div id="weatherAlerts">
+      <p><strong>Moderate Heat Warning:</strong> Temperatures expected to reach 38°C tomorrow. Stay hydrated.</p>
+      <p><strong>Wind Advisory:</strong> Winds 20-25 km/h expected on Wednesday.</p>
+    </div>
+  </div>
+
+  <!-- Crop Advisory -->
+  <div class="crop-advisory reveal delay-3">
+    <h5>🌾 Farming Advisory</h5>
+    <div id="cropAdvisory">
+      <p><strong>For Wheat Farmers:</strong> Current conditions are ideal for irrigation. No rainfall expected for next 3 days.</p>
+      <p><strong>For Cotton Farmers:</strong> Monitor for pest activity during this warm spell.</p>
+      <p><strong>General Advice:</strong> Good time for fertilizer application. Soil moisture levels are optimal.</p>
+    </div>
+  </div>
+
+  <!-- Weather Map -->
+  <section class="weather-map reveal delay-3">
+    <h4>🗺️ Weather Map</h4>
+    <p class="text-muted">Real-time satellite and radar imagery for your region</p>
+    <div class="map-placeholder">
+      <div>
+        <div style="font-size: 3rem;">🌧️</div>
+        <p>Interactive Weather Map</p>
+        <small class="text-muted">Rainfall and temperature overlay</small>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rainMap" checked>
+          <label class="form-check-label" for="rainMap">Rainfall</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="tempMap">
+          <label class="form-check-label" for="tempMap">Temperature</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="windMap">
+          <label class="form-check-label" for="windMap">Wind</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="satelliteMap">
+          <label class="form-check-label" for="satelliteMap">Satellite</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weather Image Gallery -->
+  <section class="reveal delay-3">
+    <h4>📸 Weather Conditions Gallery</h4>
+    <div class="weather-image-gallery">
+      <div>
+        <img src="assets/img/sunny-field.jpg" alt="Sunny Field" class="weather-image">
+        <p class="small text-center mt-2">Sunny Day - Ideal for Harvesting</p>
+      </div>
+      <div>
+        <img src="assets/img/rain-agri.jpg" alt="Rain in Fields" class="weather-image">
+        <p class="small text-center mt-2">Rainy Conditions</p>
+      </div>
+      <div>
+        <img src="assets/img/fog-farm.jpg" alt="Foggy Morning" class="weather-image">
+        <p class="small text-center mt-2">Foggy Morning</p>
+      </div>
+      <div>
+        <img src="assets/img/cloudy-sky.jpg" alt="Cloudy Sky" class="weather-image">
+        <p class="small text-center mt-2">Cloudy Weather</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weather Graphs -->
+  <section class="weather-graph reveal delay-4">
+    <h4>📈 Weather Trends</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <h6>Temperature Trend (Last 7 Days)</h6>
+        <div class="graph-placeholder">
+          <div>
+            <div style="font-size: 2rem;">📊</div>
+            <p>Temperature Chart</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h6>Rainfall Analysis (Monthly)</h6>
+        <div class="graph-placeholder">
+          <div>
+            <div style="font-size: 2rem;">🌧️</div>
+            <p>Rainfall Chart</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seasonal Information -->
+  <section class="seasonal-info reveal delay-4">
+    <h4>🌤️ Seasonal Weather Patterns</h4>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="weather-card">
+          <div class="weather-icon">☀️</div>
+          <h5>Summer (Mar-May)</h5>
+          <ul class="small">
+            <li>Avg Temp: 25-40°C</li>
+            <li>Rainfall: Low</li>
+            <li>Crops: Mango, Watermelon</li>
+            <li>Advice: Irrigate early morning</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="weather-card">
+          <div class="weather-icon">🌧️</div>
+          <h5>Monsoon (Jun-Sep)</h5>
+          <ul class="small">
+            <li>Avg Temp: 20-30°C</li>
+            <li>Rainfall: High</li>
+            <li>Crops: Rice, Pulses</li>
+            <li>Advice: Monitor drainage</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="weather-card">
+          <div class="weather-icon">⛄</div>
+          <h5>Winter (Oct-Feb)</h5>
+          <ul class="small">
+            <li>Avg Temp: 10-25°C</li>
+            <li>Rainfall: Low-Moderate</li>
+            <li>Crops: Wheat, Vegetables</li>
+            <li>Advice: Protect from frost</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Air Quality Index -->
+  <section class="reveal delay-4">
+    <h4>🌬️ Air Quality Index (AQI)</h4>
+    <div class="aqi-display">
+      <div class="aqi-value">42</div>
+      <div class="aqi-description">
+        <h5>Good</h5>
+        <p class="mb-0">Air quality is satisfactory and poses little or no risk. 
+          Ideal for outdoor farming activities.</p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-label">PM2.5</div>
+          <div class="stat-value">15 μg/m³</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-label">PM10</div>
+          <div class="stat-value">25 μg/m³</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-label">O₃</div>
+          <div class="stat-value">30 μg/m³</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-item">
+          <div class="stat-label">NO₂</div>
+          <div class="stat-value">10 μg/m³</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historical Data -->
+  <section class="weather-graph reveal delay-5 mt-5">
+    <h4>📅 Historical Weather Data</h4>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="input-group-tool">
+          <label>Select Year</label>
+          <select class="form-select" id="yearSelect">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-group-tool">
+          <label>Select Month</label>
+          <select class="form-select" id="monthSelect">
+            <option value="jan">January</option>
+            <option value="feb">February</option>
+            <option value="mar">March</option>
+            <option value="apr">April</option>
+            <option value="may">May</option>
+            <option value="jun">June</option>
+            <option value="jul">July</option>
+            <option value="aug">August</option>
+            <option value="sep">September</option>
+            <option value="oct">October</option>
+            <option value="nov">November</option>
+            <option value="dec">December</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-outline-primary mt-3" onclick="loadHistoricalData()">Load Historical Data</button>
+    <div class="mt-4">
+      <h6>Average Temperature: 28°C | Total Rainfall: 120 mm</h6>
+    </div>
+  </section>
+
+  <!-- Weather Widgets -->
+  <section class="reveal delay-5 mt-5">
+    <h4>🌡️ Additional Weather Data</h4>
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <div class="weather-card text-center">
+          <div class="weather-icon">🌡️</div>
+          <h6>Soil Temperature</h6>
+          <div class="stat-value">26°C</div>
+          <p class="small text-muted">At 10cm depth</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="weather-card text-center">
+          <div class="weather-icon">💧</div>
+          <h6>Soil Moisture</h6>
+          <div class="stat-value">45%</div>
+          <p class="small text-muted">Field capacity</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="weather-card text-center">
+          <div class="weather-icon">🌅</div>
+          <h6>Day Length</h6>
+          <div class="stat-value">11.5h</div>
+          <p class="small text-muted">Sunlight hours</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="weather-card text-center">
+          <div class="weather-icon">🌡️</div>
+          <h6>Heat Index</h6>
+          <div class="stat-value">34°C</div>
+          <p class="small text-muted">Feels like temperature</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer mt-5">
+  <div class="container container-max">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Farmer Portal</h5>
+        <p class="text-muted">
+          A digital initiative to support farmers with knowledge and tools.
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="crops.html">Crops</a></li>
+          <li><a href="weather.html">Weather</a></li>
+          <li><a href="schemes.html">Schemes</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Weather Sources</h6>
+        <small class="text-muted">IMD • NASA • OpenWeather</small><br>
+        <small class="text-muted">Updated every 3 hours</small>
+      </div>
+    </div>
+
+    <hr>
+    <div class="text-center text-muted">
+      © 2025 Farmer Support & Innovation Portal
+    </div>
+  </div>
+</footer>
+
+<script>
+// Weather data for different locations
+const weatherData = {
+  pune: {
+    current: {
+      temp: 30,
+      condition: "Partly Cloudy",
+      icon: "🌤️",
+      feelsLike: 32,
+      humidity: 65,
+      windSpeed: "12 km/h",
+      pressure: "1013 hPa",
+      visibility: "10 km",
+      uvIndex: "6",
+      sunrise: "6:45 AM",
+      sunset: "6:30 PM"
+    },
+    forecast: [
+      { day: "Today", temp: 30, condition: "Partly Cloudy", icon: "🌤️", rain: "20%" },
+      { day: "Mon", temp: 31, condition: "Sunny", icon: "☀️", rain: "10%" },
+      { day: "Tue", temp: 29, condition: "Cloudy", icon: "☁️", rain: "40%" },
+      { day: "Wed", temp: 28, condition: "Light Rain", icon: "🌧️", rain: "60%" },
+      { day: "Thu", temp: 27, condition: "Rain", icon: "🌧️", rain: "80%" }
+    ],
+    hourly: [
+      { time: "Now", temp: 30, icon: "🌤️" },
+      { time: "1 PM", temp: 31, icon: "☀️" },
+      { time: "2 PM", temp: 32, icon: "☀️" },
+      { time: "3 PM", temp: 31, icon: "🌤️" },
+      { time: "4 PM", temp: 30, icon: "🌤️" },
+      { time: "5 PM", temp: 29, icon: "☁️" },
+      { time: "6 PM", temp: 28, icon: "☁️" },
+      { time: "7 PM", temp: 27, icon: "🌙" }
+    ]
+  },
+  nagpur: {
+    current: {
+      temp: 34,
+      condition: "Sunny",
+      icon: "☀️",
+      feelsLike: 36,
+      humidity: 55,
+      windSpeed: "8 km/h",
+      pressure: "1010 hPa",
+      visibility: "12 km",
+      uvIndex: "8",
+      sunrise: "6:30 AM",
+      sunset: "6:15 PM"
+    },
+    forecast: [
+      { day: "Today", temp: 34, condition: "Sunny", icon: "☀️", rain: "5%" },
+      { day: "Mon", temp: 35, condition: "Sunny", icon: "☀️", rain: "5%" },
+      { day: "Tue", temp: 33, condition: "Partly Cloudy", icon: "🌤️", rain: "20%" },
+      { day: "Wed", temp: 32, condition: "Cloudy", icon: "☁️", rain: "30%" },
+      { day: "Thu", temp: 31, condition: "Light Rain", icon: "🌧️", rain: "50%" }
+    ],
+    hourly: [
+      { time: "Now", temp: 34, icon: "☀️" },
+      { time: "1 PM", temp: 35, icon: "☀️" },
+      { time: "2 PM", temp: 35, icon: "☀️" },
+      { time: "3 PM", temp: 34, icon: "☀️" },
+      { time: "4 PM", temp: 33, icon: "🌤️" },
+      { time: "5 PM", temp: 32, icon: "🌤️" },
+      { time: "6 PM", temp: 31, icon: "🌤️" },
+      { time: "7 PM", temp: 30, icon: "🌙" }
+    ]
+  }
+};
+
+// Initialize with Pune data
+let currentLocation = "pune";
+
+function getWeather() {
+  const district = document.getElementById('districtSelect').value;
+  const village = document.getElementById('villageInput').value;
+  
+  // Update current location
+  currentLocation = district;
+  
+  // Get weather data for selected location
+  const data = weatherData[district] || weatherData.pune;
+  
+  // Update current weather display
+  document.getElementById('currentTemp').textContent = data.current.temp + "°C";
+  document.getElementById('currentCondition').textContent = data.current.condition;
+  document.getElementById('currentIcon').textContent = data.current.icon;
+  document.getElementById('currentLocation').textContent = 
+    village ? `${village}, ${getDistrictName(district)}` : getDistrictName(district);
+  
+  // Update current conditions
+  document.getElementById('feelsLike').textContent = data.current.feelsLike + "°C";
+  document.getElementById('humidity').textContent = data.current.humidity + "%";
+  document.getElementById('windSpeed').textContent = data.current.windSpeed;
+  document.getElementById('pressure').textContent = data.current.pressure;
+  document.getElementById('visibility').textContent = data.current.visibility;
+  document.getElementById('uvIndex').textContent = data.current.uvIndex;
+  document.getElementById('sunrise').textContent = data.current.sunrise;
+  document.getElementById('sunset').textContent = data.current.sunset;
+  
+  // Update 5-day forecast
+  updateForecast(data.forecast);
+  
+  // Update hourly forecast
+  updateHourlyForecast(data.hourly);
+  
+  // Update advisories based on weather
+  updateAdvisories(data.current.temp, data.current.condition);
+  
+  // Show success message
+  showNotification(`Weather data loaded for ${getDistrictName(district)}`);
+}
+
+function getDistrictName(code) {
+  const districts = {
+    pune: "Pune",
+    nagpur: "Nagpur",
+    nashik: "Nashik",
+    aurangabad: "Aurangabad",
+    kolhapur: "Kolhapur"
+  };
+  return districts[code] || "Pune";
+}
+
+function updateForecast(forecastData) {
+  const container = document.querySelector('.forecast-container');
+  container.innerHTML = '';
+  
+  forecastData.forEach(day => {
+    const dayElement = document.createElement('div');
+    dayElement.className = 'forecast-day';
+    dayElement.innerHTML = `
+      <div class="small text-muted">${day.day}</div>
+      <div class="forecast-icon">${day.icon}</div>
+      <div class="forecast-temp">${day.temp}°C</div>
+      <div class="small">${day.condition}</div>
+      <div class="small text-muted">Rain: ${day.rain}</div>
+    `;
+    container.appendChild(dayElement);
+  });
+}
+
+function updateHourlyForecast(hourlyData) {
+  const container = document.querySelector('.hourly-forecast');
+  container.innerHTML = '';
+  
+  hourlyData.forEach(hour => {
+    const hourElement = document.createElement('div');
+    hourElement.className = 'hour-item';
+    hourElement.innerHTML = `
+      <div class="small text-muted">${hour.time}</div>
+      <div class="forecast-icon">${hour.icon}</div>
+      <div class="forecast-temp">${hour.temp}°C</div>
+    `;
+    container.appendChild(hourElement);
+  });
+}
+
+function updateAdvisories(temp, condition) {
+  const advisoryContainer = document.getElementById('cropAdvisory');
+  const alertContainer = document.getElementById('weatherAlerts');
+  
+  let advisories = [];
+  let alerts = [];
+  
+  // Temperature-based advisories
+  if (temp > 35) {
+    advisories.push("High temperatures detected. Water crops in early morning or late evening to reduce evaporation.");
+    alerts.push("Heat Warning: Temperatures above 35°C. Stay hydrated and avoid midday work.");
+  } else if (temp < 15) {
+    advisories.push("Low temperatures detected. Protect sensitive crops from potential frost damage.");
+    alerts.push("Cold Advisory: Temperatures below 15°C. Protect seedlings and young plants.");
+  }
+  
+  // Condition-based advisories
+  if (condition.includes("Rain") || condition.includes("rain")) {
+    advisories.push("Rain expected. Delay fertilizer application. Check drainage systems.");
+    alerts.push("Rain Alert: Prepare for wet conditions. Harvest ripe crops before heavy rain.");
+  } else if (condition.includes("Sunny") || condition.includes("Clear")) {
+    advisories.push("Sunny conditions ideal for drying harvested crops. Good for pesticide application.");
+  } else if (condition.includes("Wind") || condition.includes("windy")) {
+    advisories.push("Windy conditions. Delay spraying operations. Secure farm structures.");
+    alerts.push("Wind Advisory: Avoid spraying pesticides in windy conditions.");
+  }
+  
+  // General crop advisories
+  advisories.push("Monitor soil moisture regularly. Ideal moisture level for most crops: 40-60%.");
+  advisories.push("Check weather forecast before irrigation planning.");
+  
+  // Update advisory container
+  advisoryContainer.innerHTML = advisories.map(adv => `<p><strong>Advisory:</strong> ${adv}</p>`).join('');
+  
+  // Update alert container
+  if (alerts.length > 0) {
+    alertContainer.innerHTML = alerts.map(alert => `<p><strong>⚠️ Alert:</strong> ${alert}</p>`).join('');
+  } else {
+    alertContainer.innerHTML = '<p>No weather alerts at this time.</p>';
+  }
+}
+
+function loadHistoricalData() {
+  const year = document.getElementById('yearSelect').value;
+  const month = document.getElementById('monthSelect').value;
+  
+  showNotification(`Loading historical data for ${month} ${year}...`);
+  
+  // In a real app, this would fetch from an API
+  setTimeout(() => {
+    const historicalData = {
+      avgTemp: Math.floor(Math.random() * 10) + 25,
+      totalRainfall: Math.floor(Math.random() * 100) + 50,
+      rainyDays: Math.floor(Math.random() * 15) + 5
+    };
+    
+    const resultsContainer = document.querySelector('.weather-graph .mt-4');
+    resultsContainer.innerHTML = `
+      <h6>${month} ${year} - Historical Data</h6>
+      <div class="weather-stats">
+        <div class="stat-item">
+          <div class="stat-label">Avg Temp</div>
+          <div class="stat-value">${historicalData.avgTemp}°C</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Total Rainfall</div>
+          <div class="stat-value">${historicalData.totalRainfall} mm</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Rainy Days</div>
+          <div class="stat-value">${historicalData.rainyDays}</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Max Temp</div>
+          <div class="stat-value">${historicalData.avgTemp + 5}°C</div>
+        </div>
+      </div>
+    `;
+  }, 1000);
+}
+
+function showNotification(message) {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = 'alert alert-success alert-dismissible fade show position-fixed';
+  notification.style.cssText = 'top: 100px; right: 20px; z-index: 1000; max-width: 300px;';
+  notification.innerHTML = `
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Auto remove after 3 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
+    }
+  }, 3000);
+}
+
+// Auto-update weather every 5 minutes
+setInterval(() => {
+  if (currentLocation) {
+    getWeather();
+  }
+}, 300000); // 5 minutes
+
+// Initialize with default data
+document.addEventListener('DOMContentLoaded', function() {
+  getWeather();
+  
+  // Set up map checkboxes
+  const mapCheckboxes = document.querySelectorAll('.form-check-input');
+  mapCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const mapPlaceholder = document.querySelector('.map-placeholder div');
+      const activeMaps = Array.from(mapCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.nextElementSibling.textContent)
+        .join(', ');
+      
+      if (activeMaps) {
+        mapPlaceholder.innerHTML = `
+          <div style="font-size: 3rem;">🗺️</div>
+          <p>${activeMaps} Map</p>
+          <small class="text-muted">Active layers: ${activeMaps}</small>
+        `;
+      }
+    });
+  });
+  
+  // Set up weather image gallery
+  const weatherImages = document.querySelectorAll('.weather-image');
+  weatherImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const modal = new bootstrap.Modal(document.createElement('div'));
+      // In a real app, this would open a modal with the full image
+      showNotification('Click on images to view in full size');
+    });
+  });
+});
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>
